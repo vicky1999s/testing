@@ -16,7 +16,7 @@ echo "Running Command 2: $get_co"
 $get_co >> "$output_log" 2>> "$error_log"
 
 # Command 3
-get_pods="oc get pods -A | egrep -iv 'Running|Completed"
+get_pods="oc get pods -A | egrep -v 'Running|Completed"
 echo "Running Command 3: $get_pods"
 $get_pods >> "$output_log" 2>> "$error_log"
 
