@@ -11,8 +11,8 @@ spec:
           serviceAccountName: myserviceaccount
           containers:
           - name: myapp
-            image: openshift/ose-cli:4.12
-            command: ["/bin/sh", "-c", "cat /app/script/check_status.sh"]
+            image: quay.io/vigneshwaran_s/myapptesting
+            command: ["/bin/sh", "-c", "cat /app/check_status.sh | /bin/sh"]
             volumeMounts: 
             - mountPath: /app
               name: myvolume
@@ -21,8 +21,8 @@ spec:
             configMap:
               name: myconfigmap
               items:
-                key: check_status.sh
-                path: script
+              - key: check_status.sh
+                path: check_status.sh
           restartPolicy: OnFailure
 ---
 
@@ -71,17 +71,17 @@ data:
     # Command 1
     get_nodes=$(oc get nodes)
     echo "Running Command 1: get_nodes"
-    $get_nodes >> "$output_log"
+    $get_nodes #>> "$output_log"
 
     # Command 2
     get_co=$(oc get co)
     echo "Running Command 2: get_co" 
-    $get_co >> "$output_log"
+    $get_co #>> "$output_log"
 
     # Command 3
     get_pods=$(oc get pods -A | egrep -v 'Running|Completed')
     echo "Running Command 3: get_pods"
-    $get_pods >> "$output_log" 
+    $get_pods #>> "$output_log" 
 
-    echo "Commands executed. Output saved to '$output_log'"
+    #echo "Commands executed. Output saved to '$output_log'"
 
