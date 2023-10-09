@@ -19,7 +19,7 @@ spec:
           volumes: 
           - name: myvolume 
             hostPath:
-              path: /home/student/myapp/bash_app/check_status.sh
+              path: /home/student/myapp/mygit/testing/oc_image_vol/check_status.sh
               type: File
           restartPolicy: OnFailure
 ---
