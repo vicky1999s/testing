@@ -1,14 +1,14 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: mycronjob
+  name: mycronjobvol
 spec:
   schedule: "*/1 * * * *"
   jobTemplate:
     spec:
       template:
         spec:
-          serviceAccountName: myserviceaccount
+          serviceAccountName: myserviceaccountvol
           containers:
           - name: myapp
             image: openshift/ose-cli:4.12
@@ -19,7 +19,7 @@ spec:
           volumes: 
           - name: myvolume 
             hostPath:
-              path: /home/student/myapp/bash_app/check_status.sh
+              path: /home/student/myapp/mygit/testing/oc_image_vol/check_status.sh
               type: File
           restartPolicy: OnFailure
 ---
@@ -51,6 +51,6 @@ spec:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: myserviceaccount
+  name: myserviceaccountvol
 spec:
-  serviceAccountName: myserviceaccount
+  serviceAccountName: myserviceaccountvol
