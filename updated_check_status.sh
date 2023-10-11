@@ -45,14 +45,14 @@ increment_counter_file(){
         fi
         
         #check if the counter has reached the maximum limit
-        if ["$counter" -eq "$max_count"]; then
+        if [ "$counter" -eq "$max_count" ]; then
             echo "All cronjobs have completed"
 
             #sending output to external system
             ## WIP ##
 
             #reset the counterfile to 0 to keep track of next cronjob execution
-            echo "0" > "$counter_file"
+            counter=0
         else
             counter=$((counter+1))
             #update the shared counter
