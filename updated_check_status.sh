@@ -42,7 +42,6 @@ increment_counter_file(){
             counter=$(cat "$counter_file")
         else
             counter=1
-            echo "$counter" > "$counter_file"
         fi
         
         #check if the counter has reached the maximum limit
@@ -57,10 +56,10 @@ increment_counter_file(){
         else
             counter=$((counter+1))
             #update the shared counter
-            echo "#counter" > "$counter_file"
 
             echo "cronjob completed. counter value: $counter"
         fi
+        echo "$counter" > "$counter_file"
     ) 201>"$counter_file.lock" 
 }
 
