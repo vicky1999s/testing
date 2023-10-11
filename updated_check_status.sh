@@ -31,11 +31,11 @@ echo "Commands executed. Output and Errors saved to '$output_log'"
 #increment the counterfile value, indicating that the cronjob is completed 
 increment_counter_file(){
     counter_file="counterfile"
-    max_count=8
 
     (
         #flock is a file locking command to ensure only one process is updating the file
         flock -x 201
+        max_count=8
         
         #To check if counterfile is present, else creates one and updated the value to 1
         if [ -e "$counter_file" ]; then
@@ -45,7 +45,6 @@ increment_counter_file(){
             echo "$counter" > "$counter_file"
         fi
         
-
         #check if the counter has reached the maximum limit
         if ["$counter" -eq "$max_count"]; then
             echo "All cronjobs have completed"
