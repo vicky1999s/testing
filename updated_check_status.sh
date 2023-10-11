@@ -37,27 +37,27 @@ increment_counter_file(){
         flock -x 201
         max_count=8
         
-        #To check if counterfile is present, else creates one and updated the value to 1
+        #To check if counterfile is present
         if [ -e "$counter_file" ]; then
             counter=$(cat "$counter_file")
-        else
-            counter=1
+            #check if the counter has reached the maximum limit
+            if [ "$counter" -eq "$max_count" ]; then
+                echo "All cronjobs have completed"
+
+                #sending output to external system
+                ## WIP ##
+
+                #reset the counterfile to 0 to keep track of next cronjob execution
+                counter=0
+            else
+                counter=$((counter+1))
+                #update the shared counter
+
+                echo "cronjob completed. counter value: $counter"
         fi
-        
-        #check if the counter has reached the maximum limit
-        if [ "$counter" -eq "$max_count" ]; then
-            echo "All cronjobs have completed"
-
-            #sending output to external system
-            ## WIP ##
-
-            #reset the counterfile to 0 to keep track of next cronjob execution
-            counter=0
         else
-            counter=$((counter+1))
-            #update the shared counter
-
-            echo "cronjob completed. counter value: $counter"
+            #if the counterfile doesn't exist, create it with an initial value of 1
+            counter=1
         fi
         echo "$counter" > "$counter_file"
     ) 201>"$counter_file.lock" 
