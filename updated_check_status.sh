@@ -68,7 +68,7 @@ delete_old_files(){
   #local directory="/home/student/myapp/mygit/testing"
   local filename_prefix="$1"
   find . -type f -name "${filename_prefix}*" -mtime +2 -exec mv {} /tmp/ \;
-  echo "moved  the files that are older than 2 days with prefix '${filename_prefix}' in current directory"
+  echo "moved the files that are older than 2 days with prefix '${filename_prefix}'  to /tmp folder from working directory"
 }
 
 ###uncomment the below function calls for testing
