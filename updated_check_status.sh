@@ -42,6 +42,7 @@ increment_counter_file(){
     echo "#counter" > "$counter_file"
 
     echo "cronjob completed. counter value: $counter"
+  fi
 }
 
 #move older files(2 days) from current directory to tmp directory
