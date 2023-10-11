@@ -5,7 +5,7 @@ filename_prefix="status_check_output"
 output_log="${filename_prefix}_${current_date}.log"
 
 (
-    #flock is a file locking command to ensure only one process is updating the file
+    #flock is a file locking command to ensure that only one process is updating the file
     flock -x 200
 
     #get nodes status
@@ -25,9 +25,9 @@ output_log="${filename_prefix}_${current_date}.log"
     
 ) 200>"$output_log.lock"
 
-echo "Commands executed. Output and Errors saved to '$output_log'"
+echo "Commands executed. Outputs and Errors are saved to '$output_log'"
 
-#using shared counterfile to track the cronjob executions
+##using shared counterfile to track the cronjob executions
 #increment the counterfile value, indicating that the cronjob is completed 
 increment_counter_file(){
     counter_file="counterfile"
