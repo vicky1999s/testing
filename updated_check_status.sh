@@ -50,15 +50,14 @@ increment_counter_file(){
                 #reset the counterfile to 0 to keep track of next cronjob execution
                 counter=0
             else
-                counter=$((counter+1))
                 #update the shared counter
-
-                echo "cronjob completed. counter value: $counter"
-        fi
+                counter=$((counter+1)) 
+            fi
         else
             #if the counterfile doesn't exist, create it with an initial value of 1
-            counter=1
+            counter=1 
         fi
+        echo "cronjob completed. counter value: $counter"
         echo "$counter" > "$counter_file"
     ) 201>"$counter_file.lock" 
 }
