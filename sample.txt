@@ -1,5 +1,3 @@
 hello vicky, you are awesome
 yeah i know
-<<<<<<< HEAD
-1st edit in main branch in local repo at 7.1.22 8:42
-
+switch branch edit in local repo 19:47
