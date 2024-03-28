@@ -1,0 +1,56 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: mycronjobvol
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: myserviceaccountvol
+          containers:
+          - name: myapp
+            image: openshift/ose-cli:4.12
+            command: ["./check_status.sh"]
+            volumeMounts: 
+            - mountPath: /app/check_status.sh
+              name: myvolume
+          volumes: 
+          - name: myvolume 
+            hostPath:
+              path: /home/student/myapp/mygit/testing/oc_image_vol/check_status.sh
+              type: File
+          restartPolicy: OnFailure
+---
+
+# apiVersion: rbac.authorization.k8s.io/v1
+# kind: ClusterRole
+# metadata:
+#   name: myclusterrole
+# rules:
+#   apiGroups: [""]
+#   resources: ["pods", "nodes"]
+#   verbs: ["get", "list"]
+# ---
+
+# apiVersion: rbac.authorization.k8s.io/v1
+# kind: ClusterRoleBinding
+# metadata:
+#   name: myclusterrolebinding
+# roleRef:
+#   apiGroup: rbac.authorization.k8s.io
+#   kind: ClusterRole
+#   name: myclusterrole
+# subjects:
+# - kind: ServiceAccount
+#   name: myserviceaccount
+#   namespace: default
+# ---
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: myserviceaccountvol
+spec:
+  serviceAccountName: myserviceaccountvol
